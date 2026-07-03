@@ -1,0 +1,6 @@
+fraud_model.pkl
+dataset/
+*.csv
+venv/
+__pycache__/
+*.pyc
