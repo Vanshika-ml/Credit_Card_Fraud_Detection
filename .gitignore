@@ -3,3 +3,5 @@ dataset/
 venv/
 __pycache__/
 *.pyc
+*.pkl
+feature_importance.png
