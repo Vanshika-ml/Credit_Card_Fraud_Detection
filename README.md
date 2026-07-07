@@ -179,7 +179,7 @@ https://www.kaggle.com/datasets/kartik2112/fraud-detection
 
 🚀 **Streamlit App**
 
-_(Add your deployed Streamlit link here after deployment.)_
+https://creditcardfrauddetection-hndbfg8hpfgead8gu9bcqc.streamlit.app/
 
 ---
 
