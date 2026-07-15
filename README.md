@@ -1,6 +1,6 @@
 # 💳 Credit Card Fraud Detection System
 
-An end-to-end Machine Learning project that detects fraudulent credit card transactions using the **Random Forest Classifier**. The project includes data preprocessing, handling class imbalance using **SMOTE (Synthetic Minority Oversampling Technique)**, model training, evaluation, and an interactive **Streamlit web application** for real-time fraud prediction.
+An end-to-end Machine Learning project that detects fraudulent credit card transactions using the **Random Forest Classifier**. The project includes data preprocessing, handling class imbalance using **SMOTE (Synthetic Minority Oversampling Technique)**, model training, evaluation, an interactive **Streamlit web application**, and a **FastAPI REST API** — containerized with **Docker** for production-style deployment.
 
 ---
 
@@ -15,6 +15,8 @@ An end-to-end Machine Learning project that detects fraudulent credit card trans
 - 📥 Download prediction results as CSV
 - 🔍 Feature Importance analysis
 - 🌐 Interactive Streamlit web application
+- 🔌 REST API with FastAPI (auto-generated Swagger docs)
+- 🐳 Dockerized for containerized, production-style deployment
 
 ---
 
@@ -27,6 +29,8 @@ An end-to-end Machine Learning project that detects fraudulent credit card trans
 - Imbalanced-learn (SMOTE)
 - Matplotlib
 - Streamlit
+- FastAPI
+- Docker
 - Joblib
 - Git & GitHub
 
@@ -44,6 +48,8 @@ An end-to-end Machine Learning project that detects fraudulent credit card trans
 - ✅ Interactive Streamlit Dashboard
 - ✅ CSV Upload & Batch Prediction
 - ✅ Download Prediction Results
+- ✅ REST API built with FastAPI, with auto-generated Swagger documentation
+- ✅ Containerized with Docker and verified end-to-end in an isolated container
 
 ---
 
@@ -51,13 +57,16 @@ An end-to-end Machine Learning project that detects fraudulent credit card trans
 
 ```text
 Credit_Card_Fraud_Detection/
-│── app.py
+│── app.py                  # Streamlit web app
+│── main.py                 # FastAPI REST API
+│── Dockerfile               # Container definition for the API
 │── train_model.py
 │── fraud_model.pkl
 │── columns.pkl
 │── encoders.pkl
 │── feature_importance.png
-│── requirements.txt
+│── requirements.txt         # Dependencies for Streamlit app
+│── requirements-api.txt     # Dependencies for FastAPI service
 │── README.md
 │── screenshots/
 │    ├── home.png
@@ -82,7 +91,7 @@ Credit_Card_Fraud_Detection/
 7. Train Random Forest Classifier
 8. Evaluate Model Performance
 9. Save Trained Model
-10. Deploy with Streamlit
+10. Deploy with Streamlit and FastAPI
 
 ---
 
@@ -109,7 +118,7 @@ The Random Forest model was trained on a balanced dataset using **SMOTE** and ev
 
 ---
 
-## ▶️ Run Locally
+## ▶️ Run Locally (Streamlit App)
 
 ### Clone Repository
 
@@ -137,6 +146,66 @@ streamlit run app.py
 
 ---
 
+## 🔌 Run the REST API (FastAPI)
+
+### Install API Requirements
+
+```bash
+pip install -r requirements-api.txt
+```
+
+### Start the API Server
+
+```bash
+uvicorn main:app --reload
+```
+
+### Explore the API
+
+Open your browser at:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+This opens an interactive Swagger UI where you can upload a CSV of transactions to the `/predict` endpoint and get back fraud predictions with confidence scores.
+
+**Example response:**
+
+```json
+{
+  "summary": {
+    "total_transactions": 5,
+    "fraud_cases": 1,
+    "legit_cases": 4,
+    "fraud_percent": 20
+  },
+  "results": [{ "row": 0, "prediction": "LEGIT", "confidence_percent": 84.2 }]
+}
+```
+
+---
+
+## 🐳 Run with Docker
+
+The API is fully containerized for consistent, production-style deployment.
+
+### Build the Docker Image
+
+```bash
+docker build -t fraud-detection-api .
+```
+
+### Run the Container
+
+```bash
+docker run -p 8000:8000 fraud-detection-api
+```
+
+The API will be available at `http://localhost:8000/docs`, running inside an isolated container — no local Python environment setup needed.
+
+---
+
 ## 📸 Project Screenshots
 
 ### 🏠 Home Page
@@ -160,6 +229,18 @@ streamlit run app.py
 ### 📈 Dashboard
 
 ![Dashboard](screenshots/dashboard.png)
+
+---
+
+### 🔌 FastAPI Swagger Docs
+
+![API Docs](screenshots/api_docs.png)
+
+---
+
+### 📬 API Prediction Response
+
+![API Response](screenshots/api_response.png)
 
 ---
 
@@ -190,6 +271,8 @@ https://creditcardfrauddetection-hndbfg8hpfgead8gu9bcqc.streamlit.app/
 - Random Forest model optimization
 - Model evaluation using Precision, Recall, F1-Score and Accuracy
 - Building interactive ML applications using Streamlit
+- Building and documenting REST APIs with FastAPI
+- Containerizing ML services with Docker
 - Version control using Git & GitHub
 
 ---
@@ -200,8 +283,8 @@ https://creditcardfrauddetection-hndbfg8hpfgead8gu9bcqc.streamlit.app/
 - XGBoost & LightGBM implementation
 - Hyperparameter tuning using GridSearchCV
 - SHAP Explainability
-- Streamlit Cloud Deployment
-- REST API using FastAPI
+- Cloud deployment (Render / AWS / Azure)
+- CI/CD pipeline with GitHub Actions
 - Real-time Fraud Detection Pipeline
 
 ---
